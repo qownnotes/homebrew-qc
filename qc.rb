@@ -5,21 +5,21 @@
 class Qc < Formula
   desc "QOwnNotes command-line snippet manager"
   homepage "https://github.com/qownnotes/qc"
-  version "0.4.0"
+  version "0.5.0"
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/qownnotes/qc/releases/download/v0.4.0/qc_0.4.0_darwin_amd64.tar.gz"
-      sha256 "cd2b9b421be1a7bf7571a6b7d1707aee3ece3f0d36bcb19780b9a136f99d9374"
+    if Hardware::CPU.arm?
+      url "https://github.com/qownnotes/qc/releases/download/v0.5.0/qc_0.5.0_darwin_arm64.tar.gz"
+      sha256 "9744678f19907c66426bb3f38cd4e3a6025ab6b0f663ef38a7748a3a0f9ec5a3"
 
       def install
         bin.install Dir['qc']
         zsh_completion.install "misc/completions/zsh/_qc"
       end
     end
-    if Hardware::CPU.arm?
-      url "https://github.com/qownnotes/qc/releases/download/v0.4.0/qc_0.4.0_darwin_arm64.tar.gz"
-      sha256 "75f000c54bd4ee6aaf48e1dfd8280823e7eb22f0e30f9a1573e0dae0bb2a8868"
+    if Hardware::CPU.intel?
+      url "https://github.com/qownnotes/qc/releases/download/v0.5.0/qc_0.5.0_darwin_amd64.tar.gz"
+      sha256 "fbeb73f13ede75ca4940404dfb9c089e8fa4854fe693bbff7063989f0e0ea95f"
 
       def install
         bin.install Dir['qc']
@@ -29,9 +29,18 @@ class Qc < Formula
   end
 
   on_linux do
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/qownnotes/qc/releases/download/v0.5.0/qc_0.5.0_linux_arm64.tar.gz"
+      sha256 "1a6ea9d7be05721ea9ec264e6f73c3d452a5e1517f1da5d77069f742fb956114"
+
+      def install
+        bin.install Dir['qc']
+        zsh_completion.install "misc/completions/zsh/_qc"
+      end
+    end
     if Hardware::CPU.arm? && !Hardware::CPU.is_64_bit?
-      url "https://github.com/qownnotes/qc/releases/download/v0.4.0/qc_0.4.0_linux_armv6.tar.gz"
-      sha256 "c24ab91f1103cb33c4fab5f838184a6bcb45bf97fef4fa28f0f94019a7e98f72"
+      url "https://github.com/qownnotes/qc/releases/download/v0.5.0/qc_0.5.0_linux_armv6.tar.gz"
+      sha256 "f5edc2a4870d5bbb1fd0ee34cbd2e8543a85bcbab8608dc33ae19c116d3e1e1b"
 
       def install
         bin.install Dir['qc']
@@ -39,17 +48,8 @@ class Qc < Formula
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/qownnotes/qc/releases/download/v0.4.0/qc_0.4.0_linux_amd64.tar.gz"
-      sha256 "5109bd8e41222fccf78525e26c973682be3ac5837f26a08d22a7e84954d0e7e7"
-
-      def install
-        bin.install Dir['qc']
-        zsh_completion.install "misc/completions/zsh/_qc"
-      end
-    end
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/qownnotes/qc/releases/download/v0.4.0/qc_0.4.0_linux_arm64.tar.gz"
-      sha256 "a104ba7e485ab95d9b8e8eb0a96c6ce8b8eb73ab34458578e7b6b85874161aaf"
+      url "https://github.com/qownnotes/qc/releases/download/v0.5.0/qc_0.5.0_linux_amd64.tar.gz"
+      sha256 "161992d358ed78ea6222c2b90d5ed6bfa1e716141f8fbd904b153ec9703406c9"
 
       def install
         bin.install Dir['qc']
